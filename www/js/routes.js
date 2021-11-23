@@ -72,7 +72,29 @@ var routes = [{
     },
     {
         path: "/wishlist/",
-        url: "./pages/wishlist.html",
+        async: function({router, to, resolve}) {
+            // App instance
+            var app = router.app;
+
+            // Show Preloader
+            app.preloader.show();
+
+            const randomRecipeUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
+
+            Framework7.request.get(randomRecipeUrl).then((res) => {
+                var randomRecipe = JSON.parse(res.data)
+
+                // Hide Preloader
+                app.preloader.hide();
+
+                resolve({
+                    componentUrl: "./pages/wishlist.html"},{
+                    props: {
+                        randomRecipe: randomRecipe,
+                    }
+                });
+            });
+        }
     },
 
     {

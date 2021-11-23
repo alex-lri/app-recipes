@@ -1,28 +1,54 @@
-<div class="page" data-name="wishlist">
-    <div class="navbar">
-        <div class="navbar-bg"></div>
-        <div class="navbar-inner sliding">
-            <div class="title">My Wishlist</div>
+<template>
+    <div class="page" data-name="wishlist">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="title">My Wishlist</div>
+            </div>
         </div>
-    </div>
-    <div class="page-content">
-        <div class="color-theme-black">
-            <div class="container">
-                <h2 class="text-align-center">My Wishlist</h2>
-                <div>
-                    <ul class="wishlist-list">
-                        <li class="wishlist-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, esse laboriosam unde quis accusamus odio sunt nostrum atque quod, quaerat, iure in tempora ipsam dignissimos incidunt. Corrupti provident quidem consequatur.</li>
-                        <li class="wishlist-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, esse laboriosam unde quis accusamus odio sunt nostrum atque quod, quaerat, iure in tempora ipsam dignissimos incidunt. Corrupti provident quidem consequatur.</li>
-                        <li class=" wishlist-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, esse laboriosam unde quis accusamus odio sunt nostrum atque quod, quaerat, iure in tempora ipsam dignissimos incidunt. Corrupti provident quidem consequatur.</li>
-                        <li class="wishlist-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, esse laboriosam unde quis accusamus odio sunt nostrum atque quod, quaerat, iure in tempora ipsam dignissimos incidunt. Corrupti provident quidem consequatur.</li>
-                        <li class=" wishlist-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, esse laboriosam unde quis accusamus odio sunt nostrum atque quod, quaerat, iure in tempora ipsam dignissimos incidunt. Corrupti provident quidem consequatur.</li>
-                        <li class="wishlist-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, esse laboriosam unde quis accusamus odio sunt nostrum atque quod, quaerat, iure in tempora ipsam dignissimos incidunt. Corrupti provident quidem consequatur.</li>
-                        <li class=" wishlist-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, esse laboriosam unde quis accusamus odio sunt nostrum atque quod, quaerat, iure in tempora ipsam dignissimos incidunt. Corrupti provident quidem consequatur.</li>
-                        <li class="wishlist-item">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, esse laboriosam unde quis accusamus odio sunt nostrum atque quod, quaerat, iure in tempora ipsam dignissimos incidunt. Corrupti provident quidem consequatur.</li>
-                    </ul>
+        <div class="page-content">
+            <div class="color-theme-black">
+                <div class="container">
+                    <h2 class="text-align-center">My Wishlist</h2>
+                    <div>
+                    <div class="block">
+                        <button class="button button-fill" @click=${addWishList}>Add Wish list</Button>
+                    </div>
+                        <ul class="wishlist-list" style="list-style-type: none; padding-left: 5vw; padding-right: 5vw;">
+                            <li class="wishlist-item" style="margin-bottom: 2vh;">
+                                <div class="random-recipe-container" style="background-image: url(${randomRecipeThumbUrl});width: 100%;height: 25vh;display: flex; justify-content: center;align-items: center;font-size: large;color:#fff; background-repeat: no-repeat;">
+                                    <h2 style="text-align: center;">${randomRecipe.meals[0].strMeal}</h2>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-
         </div>
-
     </div>
+</template>
+<script>
+    export default (props, {
+        $store
+    }) => {
+        var randomRecipe = props.randomRecipe;
+        var randomRecipeThumbUrl = randomRecipe.meals[0].strMealThumb
+        var favoriteRecipes = $store.getters.favoriteRecipes;
+        const randomRecipeUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
+
+        const addWishList = () => {
+            Framework7.request.get(randomRecipeUrl).then((res) => {
+                randomRecipe = JSON.parse(res.data)
+            })
+            randomRecipeThumbUrl = randomRecipe.meals[0].strMealThumb
+            favoriteRecipes = $store.getters.favoriteRecipes;
+            console.log(randomRecipeThumbUrl)
+            var li_class = document.getElementByClassName("wishlist-item").cloneNode(true);
+            document.getElementByClassName("wishlist-list").appendChild(li_class);
+            document.getElementByClassName("wishlist-item").lastChild.style.backgroundImage = "url("+randomRecipeThumbUrl+")"
+            console.log(document.getElementByClassName("wishlist-list"))
+            //document.querySelectorAll("li")[0].style.backgroundImage = "url("+randomRecipeThumbUrl+")"
+        }
+        return $render;
+    }
+</script>
