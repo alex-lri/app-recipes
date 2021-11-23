@@ -12,38 +12,44 @@
       </div>
       <div class="list links-list">
         <ul>
-          ${products.value.map((product) => $h`
-          <li><a href="/product/${product.id}/">${product.title}</a></li>
+          ${categories.value.map((category) => $h`
+          <li><a href="/recipe-details/${category.idCategory}/">${category.strCategory}</a></li>
           `)}
         </ul>
       </div>
-      ${products.value.length === 3 && $h`
+      ${categories.length === 3 && $h`
       <div class="block">
         <button class="button button-fill" @click=${addProduct}>Add Product</Button>
       </div>
       `}
-      <div class="random-recipe-container" style="background-image: url(${randomRecipeThumbUrl});width: 100vw;height: 70vh;display: flex; justify-content: center;align-items: center;font-size: large;color:#fff;">
-        <h2>${randomRecipe.meals[0].strMeal}</h2>
+      <div class="recipe-container" style="background-image: url(${randomRecipeThumbUrl});">
+        <div class="mask-img">
+          <h2>${randomRecipe.strMeal}</h2>
+          <a class="recipe-btn" href="/recipe-details/${randomRecipe.idMeal}">Voir la recette</a>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
     export default (props, {
-        $store
+        $store, $onBeforeMount
     }) => {
-        const randomRecipe = props.randomRecipe;
-        console.log(randomRecipe.meals[0])
-        const randomRecipeThumbUrl = randomRecipe.meals[0].strMealThumb
-        const products = $store.getters.products;
+        const randomRecipe = props.randomRecipe.meals[0];
+        const randomRecipeThumbUrl = randomRecipe.strMealThumb;
+        const categories = $store.getters.categories;
 
-        const addProduct = () => {
-            $store.dispatch('addProduct', {
-                id: '4',
-                title: 'Apple iPhone 12',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.'
-            });
-        }
+        $onBeforeMount(() => {
+
+          const recipesCategoriesUrl = "https://www.themealdb.com/api/json/v1/1/categories.php";
+
+          Framework7.request.get(recipesCategoriesUrl).then((res) => {
+              var recipesCategories = JSON.parse(res.data);
+              for(let category of recipesCategories.categories){
+                $store.dispatch('addCategory', category);
+              }
+          });
+        });
 
         return $render;
     }

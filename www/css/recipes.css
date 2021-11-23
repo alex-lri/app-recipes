@@ -1,0 +1,27 @@
+.recipe-container{
+    width: 100vw;
+    height: 20vh;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    color:#fff;
+    background-position: center;
+    background-size: cover;
+}
+
+.recipe-container > .mask-img {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.recipe-btn{
+    background-color: #d59578;
+    color: #fff;
+    border-radius: 15px;
+    width: 120px;
+    text-align: center;
+}

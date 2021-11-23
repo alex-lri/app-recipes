@@ -37,8 +37,34 @@ var routes = [{
         }
     },
     {
-        path: "/product/:id/",
-        componentUrl: "./pages/product.html",
+        path: "/recipe-details/:id/",
+        async: function({router, to, resolve}) {
+            // App instance
+            var app = router.app;
+
+            // Show Preloader
+            app.preloader.show();
+
+            var id = to.params.id;
+
+            const recipeDetailsUrl = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + id;
+
+            Framework7.request.get(recipeDetailsUrl).then((res) => {
+                var recipeDetails = JSON.parse(res.data)
+                console.log(recipeDetails)
+                // Hide Preloader
+                app.preloader.hide();
+
+                resolve({
+                    componentUrl: "./pages/recipe-details.html",
+                },
+                {
+                    props: {
+                        recipeDetails: recipeDetails,
+                    }
+                });
+            });
+        }
     },
     {
         path: "/settings/",
