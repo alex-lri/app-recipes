@@ -66,6 +66,11 @@
   height: 100%;
 }
 
+.center-background-image{
+  background-position: center;
+  background-size: cover;
+}
+
 .flex-container{
   display: flex;
   justify-content: center;

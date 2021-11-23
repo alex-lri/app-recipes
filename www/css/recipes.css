@@ -25,3 +25,27 @@
     width: 120px;
     text-align: center;
 }
+
+.categories-list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.category-item{
+    max-width: 50vw;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.category-item > a{
+    background-color: #000;
+    text-align: center;
+    padding: 10px;
+    color: #fff;
+    font-weight: 700;
+    font-size: larger;
+    max-height: 30px;
+}
