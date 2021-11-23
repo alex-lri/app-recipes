@@ -22,6 +22,9 @@
         <button class="button button-fill" @click=${addProduct}>Add Product</Button>
       </div>
       `}
+      <div class="random-recipe-container" style="background-image: url(${randomRecipeThumbUrl});width: 100vw;height: 70vh;">
+        
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +32,8 @@
     export default (props, {
         $store
     }) => {
+        const randomRecipe = props.randomRecipe;
+        const randomRecipeThumbUrl = randomRecipe.meals[0].strMealThumb
         const products = $store.getters.products;
 
         const addProduct = () => {
