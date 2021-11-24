@@ -8,25 +8,15 @@
     </div>
     <div class="page-content">
       <div class="text-align-center">
-        <h2>Liste des recettes disponibles</h2>
+        <h2>Catégories de recettes</h2>
       </div>
       <div class="list">
         <ul class="categories-list">
           ${categories.value.map((category) => $h`
-          <li class="center-background-image category-item" style="background-image: url(${category.strCategoryThumb});"><a href="/recipe-details/${category.idCategory}/">${category.strCategory}</a></li>
+          <li class="center-background-image category-item" style="background-image: url(${category.strCategoryThumb});"><a href="/recipes-by-category/${category.strCategory}/">${category.strCategory}</a></li>
           `)}
         </ul>
       </div>
-
-      <!-- Random recipe -->
-      <div class="recipe-container" style="background-image: url(${randomRecipeThumbUrl});">
-        <div class="mask-img">
-          <h2>${randomRecipe.strMeal}</h2>
-          <a class="recipe-btn" href="/recipe-details/${randomRecipe.idMeal}/">Voir la recette</a>
-        </div>
-      </div>
-
-
     </div>
   </div>
 </template>
@@ -41,7 +31,7 @@
         $onBeforeMount(() => {
 
             const recipesCategoriesUrl = "https://www.themealdb.com/api/json/v1/1/categories.php";
-
+            
             Framework7.request.get(recipesCategoriesUrl).then((res) => {
                 var recipesCategories = JSON.parse(res.data);
                 for (let category of recipesCategories.categories) {

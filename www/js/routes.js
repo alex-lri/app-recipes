@@ -3,6 +3,32 @@ var routes = [{
         url: "./index.html",
     },
     {
+        path: "/home/",
+        async: function({router, to, resolve}) {
+            // App instance
+            var app = router.app;
+
+            // Show Preloader
+            app.preloader.show();
+
+            const randomRecipeUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
+
+            Framework7.request.get(randomRecipeUrl).then((res) => {
+                var randomRecipe = JSON.parse(res.data)
+
+                // Hide Preloader
+                app.preloader.hide();
+
+                resolve({
+                    componentUrl: "./pages/home.html"},{
+                    props: {
+                        randomRecipe: randomRecipe,
+                    }
+                });
+            });
+        }
+    },
+    {
         path: "/about/",
         url: "./pages/about.html",
     },
@@ -60,6 +86,35 @@ var routes = [{
                 {
                     props: {
                         recipeDetails: recipeDetails,
+                    }
+                });
+            });
+        }
+    },
+    {
+        path: "/recipes-by-category/:categoryName/",
+        async: function({router, to, resolve}) {
+            // App instance
+            var app = router.app;
+
+            // Show Preloader
+            app.preloader.show();
+
+            var categoryName = to.params.categoryName
+
+            const recipesByCategoryUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" + categoryName;
+
+            Framework7.request.get(recipesByCategoryUrl).then((res) => {
+                var recipes = JSON.parse(res.data)
+                // Hide Preloader
+                app.preloader.hide();
+
+                resolve({
+                    componentUrl: "./pages/recipes-by-category.html",
+                },
+                {
+                    props: {
+                        recipes: recipes,
                     }
                 });
             });

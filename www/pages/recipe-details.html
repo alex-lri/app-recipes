@@ -9,7 +9,7 @@
             <span class="if-not-md">Back</span>
           </a>
         </div>
-        <div class="title">${recipeDetails}</div>
+        <div class="title">${recipeDetails.strMeal}</div>
       </div>
     </div>
     <div class="page-content">
@@ -23,7 +23,7 @@
         <h2>Ingrédients :</h2>
         <ul class="ingredients-list">
           ${ingredients.map((ingredient) => $h`
-          <li class="center-background-image ingredient-item" style="background-image: url(${ingredient.thumbUrl});"><a href="">${ingredient.name}</a> <span>${ingredient.measure}</span></li>
+          <li class="ingredient-item"><a href="">${ingredient.name}</a> <span>${ingredient.measure}</span></li>
           `)}
         </ul>
       </div>
@@ -38,12 +38,10 @@
 <script>
   export default (props, { $f7route, $store }) => {
     const recipeDetails = props.recipeDetails.meals[0];
-    console.log(recipeDetails);
     let ingredients = [];
     
     for(let i=1; i <= 20; i++){
       if(recipeDetails['strIngredient'+i]){
-        console.log(recipeDetails['strIngredient'+i])
         let thumbUrl = "https://www.themealdb.com/images/ingredients/"+ recipeDetails['strIngredient'+i] +".png"
         ingredients.push({
           name: recipeDetails['strIngredient'+i],

@@ -1,0 +1,36 @@
+<template>
+    <div class="page" data-name="home">
+      <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-inner sliding">
+          <div class="title">Recettes</div>
+        </div>
+      </div>
+      <div class="page-content">
+        
+        <h1>Marmithon</h1>
+  
+        <!-- Random recipe -->
+        <h2>Recette du jour :</h2>
+        <div class="recipe-container" style="background-image: url(${randomRecipeThumbUrl});">
+          <div class="mask-img">
+            <h2>${randomRecipe.strMeal}</h2>
+            <a class="recipe-btn" href="/recipe-details/${randomRecipe.idMeal}/">Voir la recette</a>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </template>
+  <script>
+      export default (props, {
+          $store,
+          $onBeforeMount
+      }) => {
+          const randomRecipe = props.randomRecipe.meals[0];
+          const randomRecipeThumbUrl = randomRecipe.strMealThumb;
+  
+          return $render;
+      }
+  </script>
+  
