@@ -77,3 +77,10 @@
   justify-content: center;
   align-items: center;
 }
+
+#hearthInWishList{
+  float: right;
+  margin-right: 2vh;
+  align-self: end;
+  color: red;
+}

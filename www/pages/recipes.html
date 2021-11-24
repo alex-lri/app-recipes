@@ -38,7 +38,6 @@
         const randomRecipe = props.randomRecipe.meals[0];
         const randomRecipeThumbUrl = randomRecipe.strMealThumb;
         const categories = $store.getters.categories;
-
         $onBeforeMount(() => {
 
             const recipesCategoriesUrl = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -50,7 +49,6 @@
                 }
             });
         });
-
         return $render;
     }
 </script>
