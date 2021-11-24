@@ -9,50 +9,29 @@
             <span class="if-not-md">Back</span>
           </a>
         </div>
-        <div class="title">${recipeDetails}</div>
+        <div class="title">${currentProduct.title}</div>
       </div>
     </div>
     <div class="page-content">
-      <div class="block-title center-background-image recipe-title" style="background-image: url(${recipeDetails.strMealThumb});">
-        <div class="mask-img">
-          <h1>${recipeDetails.strMeal}</h1>
-          <span>${recipeDetails.strCategory}</span>
-        </div>
-      </div>
+      <div class="block-title">About ${currentProduct.title}</div>
       <div class="block block-strong">
-        <h2>Ingrédients :</h2>
-        <ul class="ingredients-list">
-          ${ingredients.map((ingredient) => $h`
-          <li class="center-background-image ingredient-item" style="background-image: url(${ingredient.thumbUrl});"><a href="">${ingredient.name}</a> <span>${ingredient.measure}</span></li>
-          `)}
-        </ul>
-      </div>
-
-      <div class="block block-strong instructions-container">
-        <h2>Préparation :</h2>
-        <p>${recipeDetails.strInstructions}</p>
+        ${currentProduct.description}
       </div>
     </div>
   </div>
 </template>
 <script>
   export default (props, { $f7route, $store }) => {
-    const recipeDetails = props.recipeDetails.meals[0];
+    const recipeDetails = props.recipeDetails;
     console.log(recipeDetails);
-    let ingredients = [];
-    
-    for(let i=1; i <= 20; i++){
-      if(recipeDetails['strIngredient'+i]){
-        console.log(recipeDetails['strIngredient'+i])
-        let thumbUrl = "https://www.themealdb.com/images/ingredients/"+ recipeDetails['strIngredient'+i] +".png"
-        ingredients.push({
-          name: recipeDetails['strIngredient'+i],
-          thumbUrl: thumbUrl,
-          measure: recipeDetails['strMeasure'+i]
-        });
+    /* const products = $store.getters.products;
+    const productId = $f7route.params.id;
+    let currentProduct;
+    products.value.forEach((product) => {
+      if (product.id === productId) {
+        currentProduct = product;
       }
-    }
-
+    }); */
 
     return $render;
   };

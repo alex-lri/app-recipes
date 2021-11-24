@@ -51,6 +51,7 @@ var routes = [{
 
             Framework7.request.get(recipeDetailsUrl).then((res) => {
                 var recipeDetails = JSON.parse(res.data)
+                console.log(recipeDetails)
                 // Hide Preloader
                 app.preloader.hide();
 

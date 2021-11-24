@@ -38,27 +38,10 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin: 10px;
-}
-
-.recipe-title{
-    margin: 0;
-    font-weight: 700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20vh;
-}
-
-.recipe-title > .mask-img {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
 }
 
 .category-item > a{
-    background-color: rgba(0, 0, 0, 0.658);
+    background-color: #000;
     text-align: center;
     padding: 10px;
     color: #fff;
