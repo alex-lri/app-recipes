@@ -13,7 +13,9 @@
       <div class="list">
         <ul class="categories-list">
           ${categories.value.map((category) => $h`
-          <li class="center-background-image category-item" style="background-image: url(${category.strCategoryThumb});"><a href="/recipes-by-category/${category.strCategory}/">${category.strCategory}</a></li>
+          <li class="center-background-image category-item"
+            style="background-image: url(${category.strCategoryThumb});"><a
+              href="/recipes-by-category/${category.strCategory}/">${category.strCategory}</a></li>
           `)}
         </ul>
       </div>
@@ -31,7 +33,7 @@
         $onBeforeMount(() => {
 
             const recipesCategoriesUrl = "https://www.themealdb.com/api/json/v1/1/categories.php";
-            
+
             Framework7.request.get(recipesCategoriesUrl).then((res) => {
                 var recipesCategories = JSON.parse(res.data);
                 for (let category of recipesCategories.categories) {
