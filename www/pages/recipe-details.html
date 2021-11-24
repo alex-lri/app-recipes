@@ -13,7 +13,8 @@
       </div>
     </div>
     <div class="page-content">
-      <div class="block-title center-background-image recipe-title" style="background-image: url(${recipeDetails.strMealThumb});">
+      <div class="block-title center-background-image recipe-title"
+        style="background-image: url(${recipeDetails.strMealThumb});">
         <div class="mask-img">
           <h1>${recipeDetails.strMeal}</h1>
           <span>${recipeDetails.strCategory}</span>
@@ -32,26 +33,71 @@
         <h2>Préparation :</h2>
         <p>${recipeDetails.strInstructions}</p>
       </div>
+
+      <div class="block block-strong">
+        <p>
+          <a href="#" class="button button-fill" @click=${showToastIcon}>Add to wishlist !</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
 <script>
-  export default (props, { $f7route, $store }) => {
-    const recipeDetails = props.recipeDetails.meals[0];
-    let ingredients = [];
-    
-    for(let i=1; i <= 20; i++){
-      if(recipeDetails['strIngredient'+i]){
-        let thumbUrl = "https://www.themealdb.com/images/ingredients/"+ recipeDetails['strIngredient'+i] +".png"
-        ingredients.push({
-          name: recipeDetails['strIngredient'+i],
-          thumbUrl: thumbUrl,
-          measure: recipeDetails['strMeasure'+i]
-        });
-      }
-    }
+    export default (props, {
+        $f7route,
+        $store,
+        $f7,
+        $theme,
+        $on
+    }) => {
+        const recipeDetails = props.recipeDetails.meals[0];
+        console.log(recipeDetails);
+        let ingredients = [];
 
+        for (let i = 1; i <= 20; i++) {
+            if (recipeDetails['strIngredient' + i]) {
+                console.log(recipeDetails['strIngredient' + i])
+                let thumbUrl = "https://www.themealdb.com/images/ingredients/" + recipeDetails['strIngredient' + i] + ".png"
+                ingredients.push({
+                    name: recipeDetails['strIngredient' + i],
+                    thumbUrl: thumbUrl,
+                    measure: recipeDetails['strMeasure' + i]
+                });
+            }
+        }
 
-    return $render;
-  };
+        let toastIcon;
+        const showToastIcon = () => {
+            let recipe = {
+                name: recipeDetails.strMeal,
+                thumbUrl: recipeDetails.strMealThumb,
+                idMeal: recipeDetails.idMeal,
+            }
+            $store.dispatch('addFavoriteRecipe', recipe);
+            console.log("Add to wishlist");
+
+            // Create toast
+            if (!toastIcon) {
+                toastIcon = $f7.toast.create({
+                    icon: $theme.ios || $theme.aurora ? '<i class="f7-icons">heart</i>' : '<i class="material-icons">heart</i>',
+                    text: 'Recipe add to favorites',
+                    position: 'center',
+                    closeTimeout: 2000,
+                });
+            }
+            // Open it
+            toastIcon.open();
+        }
+
+        $on('pageBeforeOut', () => {
+            $f7.toast.close();
+        })
+
+        $on('pageBeforeRemove', () => {
+            // Destroy toasts when page removed
+            if (toastIcon) toastIcon.destroy();
+        })
+        return $render;
+    };
+</script>
 </script>
