@@ -13,9 +13,7 @@
       <div class="list">
         <ul class="categories-list">
           ${categories.value.map((category) => $h`
-          <li class="center-background-image category-item mask-img"
-            style="background-image: url(${category.strCategoryThumb});"><a
-              href="/recipe-details/${category.idCategory}/">${category.strCategory}</a></li>
+          <li class="center-background-image category-item mask-img" style="background-image: url(${category.strCategoryThumb});"><a href="/recipe-details/${category.idCategory}/">${category.strCategory}</a></li>
           `)}
         </ul>
       </div>
@@ -35,8 +33,7 @@
 </template>
 <script>
     export default (props, {
-        $store,
-        $onBeforeMount
+        $store, $onBeforeMount
     }) => {
         const randomRecipe = props.randomRecipe.meals[0];
         const randomRecipeThumbUrl = randomRecipe.strMealThumb;
@@ -44,14 +41,14 @@
 
         $onBeforeMount(() => {
 
-            const recipesCategoriesUrl = "https://www.themealdb.com/api/json/v1/1/categories.php";
+          const recipesCategoriesUrl = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
-            Framework7.request.get(recipesCategoriesUrl).then((res) => {
-                var recipesCategories = JSON.parse(res.data);
-                for (let category of recipesCategories.categories) {
-                    $store.dispatch('addCategory', category);
-                }
-            });
+          Framework7.request.get(recipesCategoriesUrl).then((res) => {
+              var recipesCategories = JSON.parse(res.data);
+              for(let category of recipesCategories.categories){
+                $store.dispatch('addCategory', category);
+              }
+          });
         });
 
         return $render;
