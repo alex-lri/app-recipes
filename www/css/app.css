@@ -64,10 +64,11 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
   height: 100%;
+  color: #fff;
 }
 
 .center-background-image{
-  background-position: center;
+  background-position: top;
   background-size: cover;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="page" data-name="catalog">
+  <div class="page" data-name="recipes">
     <div class="navbar">
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
@@ -13,21 +13,20 @@
       <div class="list">
         <ul class="categories-list">
           ${categories.value.map((category) => $h`
-          <li class="center-background-image category-item mask-img" style="background-image: url(${category.strCategoryThumb});"><a href="/recipe-details/${category.idCategory}/">${category.strCategory}</a></li>
+          <li class="center-background-image category-item" style="background-image: url(${category.strCategoryThumb});"><a href="/recipe-details/${category.idCategory}/">${category.strCategory}</a></li>
           `)}
         </ul>
       </div>
-      ${categories.length === 3 && $h`
-      <div class="block">
-        <button class="button button-fill" @click=${addProduct}>Add Product</Button>
-      </div>
-      `}
+
+      <!-- Random recipe -->
       <div class="recipe-container" style="background-image: url(${randomRecipeThumbUrl});">
         <div class="mask-img">
           <h2>${randomRecipe.strMeal}</h2>
-          <a class="recipe-btn" href="/recipe-details/${randomRecipe.idMeal}">Voir la recette</a>
+          <a class="recipe-btn" href="/recipe-details/${randomRecipe.idMeal}/">Voir la recette</a>
         </div>
       </div>
+
+
     </div>
   </div>
 </template>
