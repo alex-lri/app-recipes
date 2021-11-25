@@ -5,31 +5,46 @@
       <div class="navbar-inner sliding">
         <div class="title">Recettes</div>
       </div>
-    </div>
-    <div class="page-content">
+      <div class="page-content">
+        
+        <h1>Marmithon</h1>
 
-      <h1>Marmithon</h1>
-
-      <!-- Random recipe -->
-      <h2>Recette du jour :</h2>
-      <div class="recipe-container" style="background-image: url(${randomRecipeThumbUrl});">
-        <div class="mask-img">
-          <h2>${randomRecipe.strMeal}</h2>
-          <a class="recipe-btn" href="/recipe-details/${randomRecipe.idMeal}/">Recette</a>
+        <div class="searchbar-backdrop"></div>
+            <form class="searchbar">
+            <div class="searchbar-inner">
+                <div class="searchbar-input-wrap">
+                <input type="search" placeholder="Search" />
+                <i class="searchbar-icon"></i>
+                <span class="input-clear-button"></span>
+                </div>
+                <span class="searchbar-disable-button">Cancel</span>
+            </div>
+        </form>
+  
+        <!-- Random recipe -->
+        <h2>Recette du jour :</h2>
+        <div class="recipe-container" style="background-image: url(${randomRecipeThumbUrl});">
+          <div class="mask-img">
+            <h2>${randomRecipe.strMeal}</h2>
+            <a class="recipe-btn" href="/recipe-details/${randomRecipe.idMeal}/">Voir la recette</a>
+          </div>
         </div>
       </div>
 
     </div>
-  </div>
-</template>
-<script>
-    export default (props, {
-        $store,
-        $onBeforeMount
-    }) => {
-        const randomRecipe = props.randomRecipe.meals[0];
-        const randomRecipeThumbUrl = randomRecipe.strMealThumb;
-
-        return $render;
-    }
-</script>
+  </template>
+  <script>
+      export default (props, {
+          $store,
+          $onBeforeMount,
+          $on
+      }) => {
+          const randomRecipe = props.randomRecipe.meals[0];
+          const randomRecipeThumbUrl = randomRecipe.strMealThumb;
+          
+  
+          return $render;
+      }
+  </script>
+  
+  
