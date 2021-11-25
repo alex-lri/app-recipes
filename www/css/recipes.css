@@ -48,7 +48,7 @@
 
 .recipe-title {
     margin: 0;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-weight: 700;
     display: flex;
     justify-content: center;
@@ -71,4 +71,14 @@
     font-weight: 700;
     font-size: larger;
     max-height: 30px;
+}
+
+.badge{
+    transform: scale(1.5);
+    margin: 20px;
+    padding: 12px;
+}
+
+.ingredients-container{
+    margin-top: 15px;
 }

@@ -20,7 +20,14 @@
           <span>${recipeDetails.strCategory}</span>
         </div>
       </div>
-      <div class="block block-strong">
+
+      <div class="tags-container">
+        ${recipeTags.map((tag) => $h`
+          <span class="badge">${tag}</span>
+        `)}
+      </div>
+
+      <div class="block block-strong ingredients-container">
         <h2>Ingrédients :</h2>
         <ul class="ingredients-list">
           ${ingredients.map((ingredient) => $h`
@@ -36,7 +43,7 @@
 
       <div class="block block-strong">
         <p>
-          <a href="#" class="button button-fill" @click=${showToastIcon}>Add to wishlist !</a>
+          <a href="#" class="button button-fill color-green" @click=${showToastIcon}>Add to wishlist !</a>
         </p>
       </div>
     </div>
@@ -52,13 +59,14 @@
     }) => {
         const recipeDetails = props.recipeDetails.meals[0];
         const favoriteRecipes = $store.getters.favoriteRecipes.value;
+        const recipeTags = recipeDetails.strTags ? recipeDetails.strTags.split(',') : [];
 
         let localFavoritesRecipes = [];
 
         for(let r of favoriteRecipes){
           localFavoritesRecipes.push(r);
         }
-        
+
         let ingredients = getIngredients(recipeDetails);
 
         let toastIcon;
@@ -106,5 +114,4 @@
         })
         return $render;
     };
-</script>
 </script>
