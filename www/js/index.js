@@ -1,7 +1,8 @@
 function searchByName(name) {
-    let ul = document.getElementById('list-results')
-    const searchUrl = "https://www.themealdb.com/api/json/v1/1/search.php?s="+name;
-    while (ul.hasChildNodes()) {  
+    let ul = document.getElementById("list-results");
+    const searchUrl =
+        "https://www.themealdb.com/api/json/v1/1/search.php?s=" + name;
+    while (ul.hasChildNodes()) {
         ul.removeChild(ul.firstChild);
     }
 
@@ -14,4 +15,13 @@ function searchByName(name) {
     });
 }
 
+function truncateTitle(title) {
+    const newMealTitle = title.length < 20 ? title : title.slice(0, 19) + "...";
+    console.log("Nouveau titre du plat :", newMealTitle);
+    return newMealTitle;
+}
 
+// function recipesTitle(recipeStrMeal, recipeStrMeal, recipeNok) {
+//     if (recipeStrMeal <= 20) return recipeStrMeal;
+//     else return recipeNok;
+// }
