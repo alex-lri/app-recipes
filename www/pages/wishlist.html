@@ -16,7 +16,7 @@
                             <div class="mask-img" id="favoriteRecipe">
                                 <i class="icon f7-icons if-not-md" id="${recipe.idMeal}">suit_heart_fill</i>
                                 <i class="icon material-icons if-md" id="${recipe.idMeal}">suit_heart_fill</i>
-                                <h2>${recipe.name}</h2>
+                                <h2>${truncateTitle(recipe.name)}</h2>
                                 <a class="recipe-btn" href="/recipe-details/${recipe.idMeal}/">Recette</a>
                             </div>
                         </div>

@@ -48,9 +48,10 @@
         $store,
         $f7,
         $theme,
-        $on
+        $on,
     }) => {
         const recipeDetails = props.recipeDetails.meals[0];
+        let favoriteRecipes = $store.getters.favoriteRecipes.value;
         let ingredients = [];
 
         for (let i = 1; i <= 20; i++) {
@@ -71,19 +72,32 @@
                 thumbUrl: recipeDetails.strMealThumb,
                 idMeal: recipeDetails.idMeal,
             }
-            $store.dispatch('addFavoriteRecipe', recipe);
 
-            // Create toast
-            if (!toastIcon) {
-                toastIcon = $f7.toast.create({
-                    icon: $theme.ios || $theme.aurora ? '<i class="f7-icons">heart_fill</i>' : '<i class="material-icons">heart_fill</i>',
-                    text: 'Recipe add to favorites',
-                    position: 'center',
-                    closeTimeout: 2000,
-                });
+            let isAlreadyFavorite = false;
+
+            for(let recipe of favoriteRecipes){
+              if(recipe.idMeal == recipeDetails.idMeal){
+                isAlreadyFavorite = true;
+              }
             }
-            // Open it
-            toastIcon.open();
+
+            if(!isAlreadyFavorite){
+              favoriteRecipes.push(recipe)
+              $store.dispatch('addFavoriteRecipe', recipe);
+
+              // Create toast
+              if (!toastIcon) {
+                  toastIcon = $f7.toast.create({
+                      icon: $theme.ios || $theme.aurora ? '<i class="f7-icons">heart_fill</i>' : '<i class="material-icons">heart_fill</i>',
+                      text: 'Recipe add to favorites',
+                      position: 'center',
+                      closeTimeout: 2000,
+                  });
+              }
+              // Open it
+              toastIcon.open();
+            }
+            
         }
 
         $on('pageBeforeOut', () => {
