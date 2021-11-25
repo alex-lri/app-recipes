@@ -51,7 +51,14 @@
         $on,
     }) => {
         const recipeDetails = props.recipeDetails.meals[0];
-        let favoriteRecipes = $store.getters.favoriteRecipes.value;
+        const favoriteRecipes = $store.getters.favoriteRecipes.value;
+
+        let localFavoritesRecipes = [];
+
+        for(let r of favoriteRecipes){
+          localFavoritesRecipes.push(r);
+        }
+        
         let ingredients = getIngredients(recipeDetails);
 
         let toastIcon;
@@ -64,14 +71,14 @@
 
             let isAlreadyFavorite = false;
 
-            for(let recipe of favoriteRecipes){
+            for(let recipe of localFavoritesRecipes){
               if(recipe.idMeal == recipeDetails.idMeal){
                 isAlreadyFavorite = true;
               }
             }
 
             if(!isAlreadyFavorite){
-              favoriteRecipes.push(recipe)
+              localFavoritesRecipes.push(recipe)
               $store.dispatch('addFavoriteRecipe', recipe);
 
               // Create toast
