@@ -12,9 +12,6 @@ var routes = [{
                     customSearch: true,
                     el: '.searchbar',
                     on: {
-                        enable: function () {
-                            break;
-                        },
                         search: function(search) {
                             searchByName(search.query);
                             if(search.query == ""){
