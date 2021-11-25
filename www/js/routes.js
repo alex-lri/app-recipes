@@ -17,6 +17,15 @@ var routes = [{
                         },
                         search: function(search) {
                             searchByName(search.query);
+                            if(search.query == ""){
+                                resetSearchResults();
+                            }
+                        },
+                        disable: function() {
+                            resetSearchResults();
+                        },
+                        clear: function(){
+                            resetSearchResults();
                         }
                     }
                 })

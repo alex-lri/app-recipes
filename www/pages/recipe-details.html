@@ -51,13 +51,11 @@
         $on
     }) => {
         const recipeDetails = props.recipeDetails.meals[0];
-        console.log(recipeDetails);
         let ingredients = [];
 
         for (let i = 1; i <= 20; i++) {
             if (recipeDetails['strIngredient' + i]) {
-                console.log(recipeDetails['strIngredient' + i])
-                let thumbUrl = "https://www.themealdb.com/images/ingredients/" + recipeDetails['strIngredient' + i] + ".png"
+                let thumbUrl = "https://www.themealdb.com/images/ingredients/" + recipeDetails['strIngredient' + i] + ".png";
                 ingredients.push({
                     name: recipeDetails['strIngredient' + i],
                     thumbUrl: thumbUrl,
@@ -74,7 +72,6 @@
                 idMeal: recipeDetails.idMeal,
             }
             $store.dispatch('addFavoriteRecipe', recipe);
-            console.log("Add to wishlist");
 
             // Create toast
             if (!toastIcon) {
