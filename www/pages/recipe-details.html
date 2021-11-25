@@ -23,22 +23,29 @@
 
       <div class="tags-container">
         ${recipeTags.map((tag) => $h`
-          <span class="badge">${tag}</span>
+        <span class="badge">${tag}</span>
         `)}
       </div>
 
       <div class="block block-strong ingredients-container">
         <h2>Ingrédients :</h2>
-        <ul class="ingredients-list">
-          ${ingredients.map((ingredient) => $h`
-          <li class="ingredient-item"><a href="">${ingredient.name}</a> <span>${ingredient.measure}</span></li>
-          `)}
-        </ul>
+        <div class="list simple-list">
+          <ul class="ingredients-list">
+            ${ingredients.map((ingredient) => $h`
+            <li class="ingredient-item" style="text-transform: capitalize; "><a href="">${ingredient.name}</a>
+              <span>${ingredient.measure}</span>
+            </li>
+            `)}
+          </ul>
+        </div>
+
       </div>
 
       <div class="block block-strong instructions-container">
         <h2>Préparation :</h2>
-        <p>${recipeDetails.strInstructions}</p>
+        <p class="justify-content-center"
+          style="font-size: 17px; text-align: justify; text-justify: inter-word; padding: 0px 10px 0px 10px;">
+          ${recipeDetails.strInstructions}</p>
       </div>
 
       <div class="block block-strong">
@@ -63,8 +70,8 @@
 
         let localFavoritesRecipes = [];
 
-        for(let r of favoriteRecipes){
-          localFavoritesRecipes.push(r);
+        for (let r of favoriteRecipes) {
+            localFavoritesRecipes.push(r);
         }
 
         let ingredients = getIngredients(recipeDetails);
@@ -79,29 +86,29 @@
 
             let isAlreadyFavorite = false;
 
-            for(let recipe of localFavoritesRecipes){
-              if(recipe.idMeal == recipeDetails.idMeal){
-                isAlreadyFavorite = true;
-              }
+            for (let recipe of localFavoritesRecipes) {
+                if (recipe.idMeal == recipeDetails.idMeal) {
+                    isAlreadyFavorite = true;
+                }
             }
 
-            if(!isAlreadyFavorite){
-              localFavoritesRecipes.push(recipe)
-              $store.dispatch('addFavoriteRecipe', recipe);
+            if (!isAlreadyFavorite) {
+                localFavoritesRecipes.push(recipe)
+                $store.dispatch('addFavoriteRecipe', recipe);
 
-              // Create toast
-              if (!toastIcon) {
-                  toastIcon = $f7.toast.create({
-                      icon: $theme.ios || $theme.aurora ? '<i class="f7-icons">heart_fill</i>' : '<i class="material-icons">heart_fill</i>',
-                      text: 'Recipe add to favorites',
-                      position: 'center',
-                      closeTimeout: 2000,
-                  });
-              }
-              // Open it
-              toastIcon.open();
+                // Create toast
+                if (!toastIcon) {
+                    toastIcon = $f7.toast.create({
+                        icon: $theme.ios || $theme.aurora ? '<i class="f7-icons">heart_fill</i>' : '<i class="material-icons">heart_fill</i>',
+                        text: 'Recipe add to favorites',
+                        position: 'center',
+                        closeTimeout: 2000,
+                    });
+                }
+                // Open it
+                toastIcon.open();
             }
-            
+
         }
 
         $on('pageBeforeOut', () => {
@@ -114,4 +121,5 @@
         })
         return $render;
     };
+</script>eturn $render; };
 </script>
