@@ -13,7 +13,7 @@ var routes = [{
                     el: '.searchbar',
                     on: {
                         enable: function () {
-                            console.log('Searchbar enabled')
+                            break;
                         },
                         search: function(search) {
                             searchByName(search.query);
