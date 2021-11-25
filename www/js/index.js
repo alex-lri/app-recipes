@@ -8,7 +8,8 @@ function searchByName(name) {
     Framework7.request.get(searchUrl).then((res) => {
         let recipes = JSON.parse(res.data)
         for(let r of recipes.meals){
-            let liHtml = '<li class="item-content"><div class="item-inner"><div class="item-title"><a href="/recipe-details/'+ r.idMeal +'/">'+ r.strMeal +'</a></div></div></li>';
+            console.log(r)
+            let liHtml = '<li class="item-content"><div class="item-inner"><div class="item-title"><a href="/recipe-details/'+ r.idMeal +'/">'+ r.strMeal +'</a></div><img src="'+ r.strMealThumb +'/preview"/></div></li>';
             ul.insertAdjacentHTML("afterBegin",liHtml);
         }
     });
