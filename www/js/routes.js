@@ -4,13 +4,39 @@ var routes = [{
     },
     {
         path: "/home/",
+        on:{
+            pageAfterIn: function(e, page){
+                var router = this;
+                var app = router.app;
+                app.searchbar.create({
+                    customSearch: true,
+                    el: '.searchbar',
+                    on: {
+                        enable: function () {
+                            console.log('Searchbar enabled')
+                        },
+                        search: function(search) {
+                            searchByName(search.query);
+                            if(search.query == ""){
+                                resetSearchResults();
+                            }
+                        },
+                        disable: function() {
+                            resetSearchResults();
+                        },
+                        clear: function(){
+                            resetSearchResults();
+                        }
+                    }
+                })
+
+            }
+        },
         async: function({router, to, resolve}) {
             // App instance
             var app = router.app;
 
             // Show Preloader
-            app.preloader.show();
-
             const randomRecipeUrl = "https://www.themealdb.com/api/json/v1/1/random.php";
 
             Framework7.request.get(randomRecipeUrl).then((res) => {
@@ -26,6 +52,8 @@ var routes = [{
                     }
                 });
             });
+
+
         }
     },
     {

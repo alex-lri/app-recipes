@@ -24,7 +24,7 @@
             ${recipes.map((recipe) => $h`
             <div class="recipe-container" style="background-image: url(${recipe.strMealThumb});">
                 <div class="mask-img">
-                    <h2>${recipe.strMeal}</h2>
+                    <h2>${truncateTitle(recipe.strMeal)}</h2>
                     <a class="recipe-btn" href="/recipe-details/${recipe.idMeal}/">Recette</a>
                 </div>
             </div>

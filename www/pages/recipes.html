@@ -12,10 +12,8 @@
       </div>
       <div class="list">
         <ul class="categories-list">
-          ${categories.value.map((category) => $h`
-          <li class="center-background-image category-item"
-            style="background-image: url(${category.strCategoryThumb});"><a
-              href="/recipes-by-category/${category.strCategory}/">${category.strCategory}</a></li>
+          ${categories.map((category) => $h`
+          <li class="center-background-image category-item" style="background-image: url(${category.strCategoryThumb});"><a href="/recipes-by-category/${category.strCategory}/">${category.strCategory}</a></li>
           `)}
         </ul>
       </div>
@@ -29,7 +27,8 @@
     }) => {
         const randomRecipe = props.randomRecipe.meals[0];
         const randomRecipeThumbUrl = randomRecipe.strMealThumb;
-        const categories = $store.getters.categories;
+        const categories1 = $store.getters.categories;
+        let categories = [];
         $onBeforeMount(() => {
 
             const recipesCategoriesUrl = "https://www.themealdb.com/api/json/v1/1/categories.php";
@@ -38,6 +37,7 @@
                 var recipesCategories = JSON.parse(res.data);
                 for (let category of recipesCategories.categories) {
                     $store.dispatch('addCategory', category);
+                    categories.push(category)
                 }
             });
         });
