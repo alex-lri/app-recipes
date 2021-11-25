@@ -5,21 +5,30 @@
       <div class="navbar-inner sliding">
         <div class="title">Recettes</div>
       </div>
+    </div>
       <div class="page-content">
         
         <h1>Marmithon</h1>
 
         <div class="searchbar-backdrop"></div>
+        <div class="block searchbar-hide-on-search">
+          <p>This block will be hidden on search. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
             <form class="searchbar">
-            <div class="searchbar-inner">
-                <div class="searchbar-input-wrap">
-                <input type="search" placeholder="Search" />
-                <i class="searchbar-icon"></i>
-                <span class="input-clear-button"></span>
+                <div class="searchbar-inner">
+                    <div class="searchbar-input-wrap">
+                    <input type="search" placeholder="Search" />
+                    <i class="searchbar-icon"></i>
+                    <span class="input-clear-button"></span>
+                    </div>
+                    <span class="searchbar-disable-button">Cancel</span>
                 </div>
-                <span class="searchbar-disable-button">Cancel</span>
+            </form>
+            <div class="list searchbar-found">
+              <ul id="list-results">
+                
+              </ul>
             </div>
-        </form>
   
         <!-- Random recipe -->
         <h2>Recette du jour :</h2>
@@ -32,12 +41,11 @@
       </div>
 
     </div>
-  </template>
+</template>
   <script>
       export default (props, {
           $store,
-          $onBeforeMount,
-          $on
+          $onBeforeMount
       }) => {
           const randomRecipe = props.randomRecipe.meals[0];
           const randomRecipeThumbUrl = randomRecipe.strMealThumb;
