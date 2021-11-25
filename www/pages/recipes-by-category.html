@@ -1,51 +1,54 @@
 <template>
     <div class="page" data-name="product">
         <div class="navbar">
-        <div class="navbar-bg"></div>
-        <div class="navbar-inner sliding">
-            <div class="left">
-            <a href="#" class="link back">
-                <i class="icon icon-back"></i>
-                <span class="if-not-md">Back</span>
-            </a>
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner sliding">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span class="if-not-md">Back</span>
+                    </a>
+                </div>
+                <div class="title">Category ${currentCategoryStr}</div>
             </div>
-            <div class="title">Category ${currentCategoryStr}</div>
-        </div>
         </div>
         <div class="page-content">
-        <div class="block-title center-background-image recipe-title" style="background-image: url(${currentCategoryThumbUrl});">
-            <div class="mask-img">
-            <h1>Category ${currentCategoryStr}</h1>
-            <span>${recipes.length} recettes trouvées.</span>
+            <div class="block-title center-background-image recipe-title"
+                style="background-image: url(${currentCategoryThumbUrl});">
+                <div class="mask-img">
+                    <h1>Category ${currentCategoryStr}</h1>
+                    <span>${recipes.length} recettes trouvées.</span>
+                </div>
             </div>
-        </div>
 
-        ${recipes.map((recipe) => $h`
-        <div class="recipe-container" style="background-image: url(${recipe.strMealThumb});">
-            <div class="mask-img">
-                <h2>${recipe.strMeal}</h2>
-                <a class="recipe-btn" href="/recipe-details/${recipe.idMeal}/">Voir la recette</a>
+            ${recipes.map((recipe) => $h`
+            <div class="recipe-container" style="background-image: url(${recipe.strMealThumb});">
+                <div class="mask-img">
+                    <h2>${recipe.strMeal}</h2>
+                    <a class="recipe-btn" href="/recipe-details/${recipe.idMeal}/">Recette</a>
+                </div>
             </div>
-        </div>
-        `)}
+            `)}
 
         </div>
     </div>
 </template>
 <script>
-export default (props, { $f7route, $store }) => {
-    const recipes = props.recipes.meals;
-    let currentCategoryThumbUrl = "";
-    const currentCategoryStr = $f7route.params.categoryName;
-    const categories = $store.getters.categories;
+    export default (props, {
+        $f7route,
+        $store
+    }) => {
+        const recipes = props.recipes.meals;
+        let currentCategoryThumbUrl = "";
+        const currentCategoryStr = $f7route.params.categoryName;
+        const categories = $store.getters.categories;
 
-    for(let category of categories.value){
-        if(category.strCategory == currentCategoryStr){
-            currentCategoryThumbUrl = category.strCategoryThumb;
+        for (let category of categories.value) {
+            if (category.strCategory == currentCategoryStr) {
+                currentCategoryThumbUrl = category.strCategoryThumb;
+            }
         }
-    }
 
-    return $render;
-};
+        return $render;
+    };
 </script>
-  
