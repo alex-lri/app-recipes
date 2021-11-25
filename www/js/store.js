@@ -20,5 +20,9 @@ const store = createStore({
         addFavoriteRecipe({ state }, recipe) {
             state.favoriteRecipes = [...state.favoriteRecipes, recipe];
         },
+
+        reumoveWishList({ state }, recipe) {
+          state.favoriteRecipes = state.favoriteRecipes.filter(favoriteRecipe => favoriteRecipe.idMeal !== recipe);
+        },
     },
 });

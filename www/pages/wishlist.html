@@ -34,7 +34,12 @@
         var randomRecipe = props.randomRecipe;
         var randomRecipeThumbUrl = randomRecipe.meals[0].strMealThumb
         var favoriteRecipes = $store.getters.favoriteRecipes;
+        var myStore = $store.dispatch('removeWishList');
 
+        const removeRecipe = (p) => {
+            console.log("here", p)
+            $store.dispatch('removeWishList', p)
+        }
         return $render;
     }
 </script>
