@@ -24,3 +24,20 @@ function resetSearchResults() {
 function truncateTitle(title) {
     return title.length < 20 ? title : title.slice(0, 19) + "...";
 }
+
+function getIngredients(recipeDetails) {
+    let ingredients = [];
+
+    for (let i = 1; i <= 20; i++) {
+        if (recipeDetails['strIngredient' + i]) {
+            let thumbUrl = "https://www.themealdb.com/images/ingredients/" + recipeDetails['strIngredient' + i] + ".png";
+            ingredients.push({
+                name: recipeDetails['strIngredient' + i],
+                thumbUrl: thumbUrl,
+                measure: recipeDetails['strMeasure' + i]
+            });
+        }
+    }
+
+    return ingredients;
+}
