@@ -83,7 +83,7 @@
     align-items: center;
 }
 
-#hearthInWishList {
+#favoriteRecipe i {
     float: right;
     margin-right: 2vh;
     align-self: end;

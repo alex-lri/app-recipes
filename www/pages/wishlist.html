@@ -13,9 +13,9 @@
                     <div>
                         ${favoriteRecipes.value.map((recipe) => $h`
                         <div class="recipe-container" style="background-image: url(${recipe.thumbUrl});">
-                            <div class="mask-img">
-                                <i class="icon f7-icons if-not-md" id="hearthInWishList">suit_heart_fill</i>
-                                <i class="icon material-icons if-md" id="hearthInWishList">suit_heart_fill</i>
+                            <div class="mask-img" id="favoriteRecipe">
+                                <i class="icon f7-icons if-not-md" id="${recipe.idMeal}">suit_heart_fill</i>
+                                <i class="icon material-icons if-md" id="${recipe.idMeal}">suit_heart_fill</i>
                                 <h2>${recipe.name}</h2>
                                 <a class="recipe-btn" href="/recipe-details/${recipe.idMeal}/">Recette</a>
                             </div>
@@ -34,12 +34,11 @@
         var randomRecipe = props.randomRecipe;
         var randomRecipeThumbUrl = randomRecipe.meals[0].strMealThumb
         var favoriteRecipes = $store.getters.favoriteRecipes;
-        var myStore = $store.dispatch('removeWishList');
 
-        const removeRecipe = (p) => {
-            console.log("here", p)
-            $store.dispatch('removeWishList', p)
-        }
+        $(document).on('click','#favoriteRecipe i',function(e){
+            $store.dispatch('removeWishList', this.id)
+        });
+
         return $render;
     }
 </script>
